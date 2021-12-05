@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class StepsManager {
+public class StepsManager implements Comparable <StepsManager>{
     public int maxSteps;
 
     private Map<Integer, Integer> stat = new HashMap<>();
@@ -26,13 +26,30 @@ public class StepsManager {
     }
 
     public int setMaxSteps(){
-        Set<Integer> days = stat.keySet();
-        Integer[] arrDays = days.toArray(new Integer[days.size()]);
-        for(int i = 0; i < arrDays.length; i++){
-            if (stat.get(arrDays[i]) > maxSteps){
-                maxSteps = stat.get(arrDays[i]);
+        for (Integer i : stat.keySet()){
+            if (stat.get(i) > maxSteps){
+                maxSteps = stat.get(i);
             }
         }
         return maxSteps;
+    }
+
+
+    @Override
+    public int compareTo(StepsManager playerSecond) {
+        int sumStepsFirstPlayer = 0;
+        int sumStepsSecondPlayer = 0;
+
+        Map<Integer, Integer> statSecondPlayer = playerSecond.getStat();
+
+        for (Integer i : stat.keySet()){
+            sumStepsFirstPlayer += stat.get(i);
+        }
+
+        for(Integer i : statSecondPlayer.keySet()){
+            sumStepsSecondPlayer += statSecondPlayer.get(i);
+        }
+
+        return sumStepsFirstPlayer - sumStepsSecondPlayer;
     }
 }
