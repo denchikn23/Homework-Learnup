@@ -1,8 +1,8 @@
 package learnupmvn;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class StepsManager implements Comparable <StepsManager>{
     public int maxSteps;
@@ -52,4 +52,30 @@ public class StepsManager implements Comparable <StepsManager>{
 
         return sumStepsFirstPlayer - sumStepsSecondPlayer;
     }
+
+    void getAllAbove(int steps) {
+        stat.entrySet().stream()
+                .filter(s -> s.getValue() > steps)
+                .map(s -> s.getKey())
+                .forEach(System.out::println);
+    }
+
+    public static void main(String[] args) {
+        StepsManager actualManager = new StepsManager();
+
+        actualManager.add(5, 30);
+        actualManager.add(3, 40);
+        actualManager.add(2, 10);
+        actualManager.add(2, 40);
+        actualManager.add(1, 40);
+        actualManager.add(3, 10);
+        actualManager.add(4, 10);
+        actualManager.add(7, 40);
+        actualManager.add(8, 20);
+        actualManager.add(9, 60);
+
+        actualManager.getAllAbove(30);
+    }
 }
+
+
