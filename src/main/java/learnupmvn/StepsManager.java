@@ -1,8 +1,6 @@
 package learnupmvn;
 
 import java.util.*;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class StepsManager implements Comparable <StepsManager>{
     public int maxSteps;
@@ -13,7 +11,13 @@ public class StepsManager implements Comparable <StepsManager>{
         return stat;
     }
 
-    public int add(int day, int steps) {
+    public int add(int day, int steps) throws IllegalDayException, IllegalStepsException{
+        if ((day < 1) || (day > 365)){
+            throw new IllegalDayException(day);
+        }
+        if (steps < 0){
+            throw new IllegalStepsException(steps);
+        }
         if (stat.containsKey(day)){
             stat.put(day, stat.get(day) + steps);
         }
@@ -77,5 +81,3 @@ public class StepsManager implements Comparable <StepsManager>{
         actualManager.getAllAbove(30);
     }
 }
-
-
