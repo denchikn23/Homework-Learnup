@@ -1,4 +1,4 @@
-package learnupmvn;
+package learnup;
 
 import java.util.*;
 
@@ -11,13 +11,8 @@ public class StepsManager implements Comparable <StepsManager>{
         return stat;
     }
 
-    public int add(int day, int steps) throws IllegalDayException, IllegalStepsException{
-        if ((day < 1) || (day > 365)){
-            throw new IllegalDayException(day);
-        }
-        if (steps < 0){
-            throw new IllegalStepsException(steps);
-        }
+    public int add(int day, int steps) {
+
         if (stat.containsKey(day)){
             stat.put(day, stat.get(day) + steps);
         }
@@ -64,8 +59,11 @@ public class StepsManager implements Comparable <StepsManager>{
                 .forEach(System.out::println);
     }
 
+
+
     public static void main(String[] args) {
         StepsManager actualManager = new StepsManager();
+
 
         actualManager.add(5, 30);
         actualManager.add(3, 40);
